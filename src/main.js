@@ -15,7 +15,6 @@ export function onSubmit(event) {
     const form = event.currentTarget;
     
     const { searchText } = form.elements;
-    console.log(searchText.value);
     const correctValueText = searchText.value.trim();
 
     if (!correctValueText) {
