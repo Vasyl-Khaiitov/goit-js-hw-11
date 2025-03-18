@@ -1,16 +1,10 @@
-
-// Описаний у документації
 import iziToast from "izitoast";
-// Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
 import axios from "axios";
 
 const API_KEY = (axios.defaults.API_KEY = '49359087-343ead2b9467da8fb57304bcb');
 const BASE_URL = (axios.defaults.baseURL = 'https://pixabay.com/api/');
-
-
-
 
 export function requestServer(query) {
 

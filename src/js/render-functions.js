@@ -1,8 +1,30 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+let lightbox = null;
+
 const gallery = document.querySelector(".gallery");
+const loader = document.querySelector('.loader');
+
+export function clearGallery() {
+    gallery.innerHTML = '';
+}
+// Все в одній
+export function updateGallery(hits) {
+    clearGallery();
+    markupPhoto(hits);
+}
+// Приховування
+export function showLoader() {
+    loader.classList.remove('hidden');
+}
+// Показ
+export function hideLoader() {
+    loader.classList.add('hidden');
+}
 
 export function markupPhoto(hits = []) {
-    gallery.innerHTML = "";
-    
+   
     const galleryMarkup = hits
     .map(hit =>
         `<li class="gallery-item">
@@ -19,4 +41,18 @@ export function markupPhoto(hits = []) {
     )
     .join("");
     gallery.insertAdjacentHTML("beforeend", galleryMarkup)
+
+     
+            if (!lightbox) {
+                lightbox = new SimpleLightbox(".gallery a", {
+                    caption: true,
+                    captionType: "attr",
+                    captionsData: "alt",
+                    captionPosition: "bottom",
+                    captionDelay: 250
+                });
+            } else {
+                lightbox.refresh();
+            }
+
 }

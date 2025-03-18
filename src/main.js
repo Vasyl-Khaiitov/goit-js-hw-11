@@ -2,17 +2,11 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-
-
 import { requestServer } from "./js/pixabay-api";
-import { markupPhoto } from "./js/render-functions";
+import { updateGallery, showLoader, hideLoader } from './js/render-functions';
 
-let lightbox = null;
 
 const form = document.querySelector('.form');
-const loader = document.querySelector('.loader');
 form.addEventListener('submit', onSubmit);
 
 
@@ -34,7 +28,7 @@ export function onSubmit(event) {
         return;
     }
 
-    loader.classList.remove("hidden");
+    showLoader();
 
     requestServer(correctValueText)
         .then(hits => {
@@ -47,6 +41,7 @@ export function onSubmit(event) {
                     color: 'red',
                     position: "topRight"
                 });
+                hideLoader();
                 return;
             }
 
@@ -58,31 +53,18 @@ export function onSubmit(event) {
                     color: 'red',
                     position: "topRight"
                 });
-                loader.classList.add("hidden");
+                hideLoader();
                 return;
             }
 
-            markupPhoto(hits);
-            
-            if (!lightbox) {
-                lightbox = new SimpleLightbox(".gallery a", {
-                    caption: true,
-                    captionType: "attr",
-                    captionsData: "alt",
-                    captionPosition: "bottom",
-                    captionDelay: 250
-                });
-            } else {
-                lightbox.refresh();
-            }
-
+            updateGallery(hits);
             form.reset();
         })
         .catch(error => {
             console.error("Error:", error.message);
         })
         .finally(() => {
-            loader.classList.add("hidden");
+            hideLoader();
         });
 }
 
