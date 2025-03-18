@@ -14,12 +14,6 @@ const BASE_URL = (axios.defaults.baseURL = 'https://pixabay.com/api/');
 
 export function requestServer(query) {
 
-    if (!query.trim()) {
-        console.error("Search query is empty!");
-        return Promise.reject("Search query is empty.");
-    }
-
-
     const options = {
         params: {
             key: API_KEY,
