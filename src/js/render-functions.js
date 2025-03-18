@@ -1,6 +1,3 @@
-
-let lightbox = null;
-
 const gallery = document.querySelector(".gallery");
 
 export function markupPhoto(hits = []) {
