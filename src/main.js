@@ -48,12 +48,6 @@ export function onSubmit(event) {
         })
         .catch(error => {
             console.error("Error:", error.message);
-            iziToast.show({
-                title: "⚠️",
-                message: 'An unexpected error occurred. Please try again later!',
-                color: 'blue',
-                position: "topRight"
-            });
         })
         .finally(() => {
             loader.classList.add("hidden");
