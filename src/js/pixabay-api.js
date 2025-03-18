@@ -5,7 +5,6 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 import axios from "axios";
-import { markupPhoto } from "./render-functions";
 
 const API_KEY = (axios.defaults.API_KEY = '49359087-343ead2b9467da8fb57304bcb');
 const BASE_URL = (axios.defaults.baseURL = 'https://pixabay.com/api/');
@@ -35,28 +34,6 @@ export function requestServer(query) {
         .get(BASE_URL, options)
         .then(response => {
             const hits = response?.data?.hits;
-    
-            if (!Array.isArray(hits)) {
-                console.error("Invalid response structure. Hits is not an array.");
-                iziToast.show({
-                    title: "⚠️",
-                    message: 'Unexpected response format. Please try again later!',
-                    color: 'red',
-                    position: "topRight"
-                });
-                return;
-            }
-
-            if (hits.length === 0) {
-                iziToast.show({
-                    title: "❌",
-                    message: 'Sorry, there are no images matching your search query. Please try again!',
-                    color: 'red',
-                    position: "topRight"
-                });
-                return;
-            }
-            markupPhoto(hits);
             return hits;
         })
         .catch(error => {

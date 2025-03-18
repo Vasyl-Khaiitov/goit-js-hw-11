@@ -1,8 +1,3 @@
-// Описаний у документації
-import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
-
 
 let lightbox = null;
 
@@ -27,17 +22,4 @@ export function markupPhoto(hits = []) {
     )
     .join("");
     gallery.insertAdjacentHTML("beforeend", galleryMarkup)
-   
-
-    if (!lightbox) {
-        lightbox = new SimpleLightbox(".gallery a", {
-            caption: true,
-            captionType: "attr",
-            captionsData: "alt",
-            captionPosition: "bottom",
-            captionDelay: 250
-        });
-    } else {
-        lightbox.refresh();
-    }
 }
